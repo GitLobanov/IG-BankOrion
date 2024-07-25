@@ -39,7 +39,7 @@ The project is a web application for managing clients' bank accounts. Customers 
 Using threads to process transactions. Each time a client initiates a transaction, a new thread is created that processes that transaction, while ensuring data security through synchronization.
 
 #### Example of the project structure
-``
+```
 /bank-app
     /src
         /main
