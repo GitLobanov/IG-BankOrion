@@ -1,6 +1,7 @@
 package com.backend.repository;
 
-
+import com.backend.model.Account;
+import com.backend.model.Card;
 import com.backend.model.User;
 import com.backend.util.HibernateUtil;
 import org.hibernate.Session;
@@ -8,12 +9,13 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class UserRepository implements CrudRepository<User,Long>{
+public class CardRepository implements CrudRepository<Card, Long> {
+
     @Override
-    public boolean save(User user) {
+    public boolean save(Card card) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.persist(user);
+            session.persist(card);
             session.flush();
             transaction.commit();
             session.close();
@@ -25,10 +27,10 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void update(User user) {
+    public void update(Card card) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.merge(user);
+            session.merge(card);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,10 +38,10 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(Card card) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.remove(user);
+            session.remove(card);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,48 +49,59 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void saves(List<User> list) {
-        for (User user : list) {
-            save(user);
+    public void saves(List<Card> list) {
+        for (Card card : list) {
+            save(card);
         }
     }
 
     @Override
-    public User findById(Long id) {
+    public Card findById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            User user = session.get(User.class,id);
+            Card card = session.get(Card.class,id);
             transaction.commit();
-            return user;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public User findByPhoneAndPassword(String phoneNumber, String password) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-            User user = (User) session.createQuery("from User u where u.numberPhone = :phoneNumber and u.password = :password")
-                    .setParameter("phoneNumber", phoneNumber)
-                    .setParameter("password",password)
-                    .uniqueResult();
-            transaction.commit();
-            return user;
+            return card;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public Card findByCardNumber(String cardNumber) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Card card = (Card) session.createQuery("from Card c where c.cardNumber = :cardNumber")
+                    .setParameter("cardNumber", cardNumber).uniqueResult();
+            transaction.commit();
+            return card;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+
+    public List<Card> findByAccount(Account account) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            List card = session.createQuery("from Card c where c.account = :account")
+                    .setParameter("account", account).list();
+            transaction.commit();
+            return card;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // TODO
 
     @Override
-    public List<User> findAll() {
+    public List<Card> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            List <User> users = session.createQuery("from User", User.class).list();
-
-            return users;
+            List <Card> cards = session.createQuery("from Card", Card.class).list();
+            return cards;
         } catch (Exception e) {
             e.printStackTrace();
         }

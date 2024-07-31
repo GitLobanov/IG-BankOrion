@@ -5,20 +5,17 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "\"user\"")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUser")
-    private long id;
-
-    @Column(name = "fullName")
+    private long idUser;
     private String fullName;
-
-    @Column(name = "numberPhone")
     private String numberPhone;
-
     private String role;
     private String password;
+    @OneToOne
+    private Account account;
 
 }
