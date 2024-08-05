@@ -4,7 +4,6 @@
 The project is a web application for managing clients' bank accounts. Customers can open accounts, deposit and withdraw money, view transaction history and receive reports on their finances. There are also functions for administrators who can manage accounts and users.
 
 #### Goals
-- **Learn Tree Structure**
 - **Learn stack and queue**
 - **Learn multithreading** ? under question
 - **Use redis**
@@ -31,12 +30,6 @@ The project is a web application for managing clients' bank accounts. Customers 
 - **Redis**: for caching data about user sessions and frequently requested reports.
 - **Multithreading**: for transaction processing and data security.
 - **Trees**: for organizing account and transaction data.
-
-#### Using trees
-1. **Binary tree**: for storing and quickly searching information about customer accounts. Each node of the tree represents an account, and the key is a unique account identifier.
-2. **AVL tree**: for storing transactions on each account, providing balancing and quick access to the latest transactions.
-3. **Segment tree**: to make requests for the amount of transactions for a certain period of time.
-4. **Trie (prefix tree)**: to implement customer search by name or other attributes.
 
 #### Using stack and queue
 - **Stack**: to implement the history of operations (deposit/withdrawal of funds). Each operation is placed on the stack, and if necessary, you can cancel the last operation.
