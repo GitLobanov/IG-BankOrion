@@ -89,3 +89,10 @@ Redis will be used to cache data about user sessions and frequently requested re
 
 #### Conclusion
 The Financial Assistant project provides an opportunity to explore various aspects of Java development, including working with trees, multithreading, using databases and caching. This is a great opportunity to consolidate knowledge and skills in web application development.
+
+
+#### UI interafec
+
+- **History of purchases**
+
+- ![image](https://github.com/user-attachments/assets/2f1da777-79a1-4b43-ac55-f9fc13a313c5)
