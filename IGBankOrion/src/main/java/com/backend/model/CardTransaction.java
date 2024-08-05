@@ -1,20 +1,24 @@
 package com.backend.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-public class Transaction {
+public class CardTransaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String date;
+
+    @ManyToOne
+    private Card cardFrom;
+
+    @ManyToOne
+    private Card cardTo;
+
     private double amount;
 
 }

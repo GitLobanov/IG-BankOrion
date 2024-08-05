@@ -7,20 +7,16 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "account")
 public class Account {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "idAccount")
-    private long id;
-
+    private long idAccount;
     private String numberAccount;
-
-    @OneToOne
-    @JoinColumn(name = "idUser")
-    private User user;
-
-    @OneToMany (mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private List<Card> cards;
+    @OneToOne
+    private User user;
 
 }

@@ -1,6 +1,6 @@
 package com.backend.repository;
 
-
+import com.backend.model.Account;
 import com.backend.model.User;
 import com.backend.util.HibernateUtil;
 import org.hibernate.Session;
@@ -8,12 +8,13 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class UserRepository implements CrudRepository<User,Long>{
+public class AccountRepository implements CrudRepository<Account, Long> {
+
     @Override
-    public boolean save(User user) {
+    public boolean save(Account account) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.persist(user);
+            session.persist(account);
             session.flush();
             transaction.commit();
             session.close();
@@ -25,10 +26,10 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void update(User user) {
+    public void update(Account account) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.merge(user);
+            session.merge(account);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,10 +37,10 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(Account account) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.remove(user);
+            session.remove(account);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,34 +48,48 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
     @Override
-    public void saves(List<User> list) {
-        for (User user : list) {
-            save(user);
+    public void saves(List<Account> list) {
+        for (Account account : list) {
+            save(account);
         }
     }
 
     @Override
-    public User findById(Long id) {
+    public Account findById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            User user = session.get(User.class,id);
+            Account account = session.get(Account.class,id);
             transaction.commit();
-            return user;
+            return account;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public User findByPhoneAndPassword(String phoneNumber, String password) {
+
+    public Account findByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            User user = (User) session.createQuery("from User u where u.numberPhone = :phoneNumber and u.password = :password")
-                    .setParameter("phoneNumber", phoneNumber)
-                    .setParameter("password",password)
+            Account account = (Account) session.createQuery("from Account a where a.user = :user")
+                    .setParameter("user", user)
                     .uniqueResult();
             transaction.commit();
-            return user;
+            return account;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Account findByNumber(String numberAccount) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Account account = (Account) session.createQuery("from Account a where a.numberAccount = :numberAccount")
+                    .setParameter("numberAccount", numberAccount)
+                    .uniqueResult();
+            transaction.commit();
+            return account;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,13 +97,12 @@ public class UserRepository implements CrudRepository<User,Long>{
     }
 
 
-
     @Override
-    public List<User> findAll() {
+    public List<Account> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            List <User> users = session.createQuery("from User", User.class).list();
+            List <Account> accounts = session.createQuery("from Account", Account.class).list();
 
-            return users;
+            return accounts;
         } catch (Exception e) {
             e.printStackTrace();
         }
