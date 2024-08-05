@@ -3,6 +3,12 @@
 #### Description of the project
 The project is a web application for managing clients' bank accounts. Customers can open accounts, deposit and withdraw money, view transaction history and receive reports on their finances. There are also functions for administrators who can manage accounts and users.
 
+#### Goals
+- **Learn stack and queue**
+- **Learn multithreading** ? under question
+- **Use redis**
+- **Consolidation of knowledge**: JSP, Servlets, Hibernate H2 in memory
+
 #### Subject area
 - **Customers**: Users who open accounts and manage their finances.
 - **Accounts**: various types of accounts (savings, current, etc.).
@@ -25,12 +31,6 @@ The project is a web application for managing clients' bank accounts. Customers 
 - **Multithreading**: for transaction processing and data security.
 - **Trees**: for organizing account and transaction data.
 
-#### Using trees
-1. **Binary tree**: for storing and quickly searching information about customer accounts. Each node of the tree represents an account, and the key is a unique account identifier.
-2. **AVL tree**: for storing transactions on each account, providing balancing and quick access to the latest transactions.
-3. **Segment tree**: to make requests for the amount of transactions for a certain period of time.
-4. **Trie (prefix tree)**: to implement customer search by name or other attributes.
-
 #### Using stack and queue
 - **Stack**: to implement the history of operations (deposit/withdrawal of funds). Each operation is placed on the stack, and if necessary, you can cancel the last operation.
 - **Queue**: for processing incoming transactions. Each transaction is queued, and a multithreaded handler retrieves and processes them.
@@ -38,39 +38,50 @@ The project is a web application for managing clients' bank accounts. Customers 
 #### Example of multithreading
 Using threads to process transactions. Each time a client initiates a transaction, a new thread is created that processes that transaction, while ensuring data security through synchronization.
 
-#### Example of the project structure
-``
+#### Project structure
+```
 /bank-app
     /src
         /main
             /java
-                /com/bank
+                /com/backend
                     /model
                         Account.java
                         Transaction.java
+                        CardTransaction.java
                         User.java
                     /service
                         AccountService.java
                         TransactionService.java
                         UserService.java
+                    /repository
+                        AccountRepository.java
+                        CardRepository.java
+                        TransactionRepository.java
+                        UserRepository.java
+                        CrudRepository.java (interface)
                     /controller
-                        AccountServlet.java
-                        TransactionServlet.java
-                        UserServlet.java
+                        HistoryPurchasesServlet.java
+                        IndexServlet.java
+                        LoginServlet.java
+                        MakeCardServlet.java
+                        RegisterServlet.java
+                        TransferServlet.java
                     /util
-                        TreeUtil.java
-                        CacheUtil.java
+                        ContextListener.java
+                        ExceptionHandler.java
+                        HibernateUtil.java
             /resources
-                /db
-                    schema.sql
-                    data.sql
+                hibernate.cfg.xml
             /webapp
+                /css
+                /scripts
                 /WEB-INF
                     web.xml
                 index.jsp
                 login.jsp
-                account.jsp
-                transaction.jsp
+                history_purchases.jsp
+                transfer.jsp
 ```
 
 #### Using Redis
