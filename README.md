@@ -44,31 +44,44 @@ Using threads to process transactions. Each time a client initiates a transactio
     /src
         /main
             /java
-                /com/bank
+                /com/backend
                     /model
                         Account.java
                         Transaction.java
+                        CardTransaction.java
                         User.java
                     /service
                         AccountService.java
                         TransactionService.java
                         UserService.java
+                    /repository
+                        AccountRepository.java
+                        CardRepository.java
+                        TransactionRepository.java
+                        UserRepository.java
+                        CrudRepository.java (interface)
                     /controller
-                        AccountServlet.java
-                        TransactionServlet.java
-                        UserServlet.java
+                        HistoryPurchasesServlet.java
+                        IndexServlet.java
+                        LoginServlet.java
+                        MakeCardServlet.java
+                        RegisterServlet.java
+                        TransferServlet.java
                     /util
-                        TreeUtil.java
-                        CacheUtil.java
+                        ContextListener.java
+                        ExceptionHandler.java
+                        HibernateUtil.java
             /resources
                 hibernate.cfg.xml
             /webapp
+                /css
+                /scripts
                 /WEB-INF
                     web.xml
                 index.jsp
                 login.jsp
-                account.jsp
-                transaction.jsp
+                history_purchases.jsp
+                transfer.jsp
 ```
 
 #### Using Redis
