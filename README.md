@@ -3,6 +3,13 @@
 #### Description of the project
 The project is a web application for managing clients' bank accounts. Customers can open accounts, deposit and withdraw money, view transaction history and receive reports on their finances. There are also functions for administrators who can manage accounts and users.
 
+#### Goals
+- **Learn Tree Structure**
+- **Learn stack and queue**
+- **Learn multithreading** ? under question
+- **Use redis**
+- **Consolidation of knowledge**: JSP, Servlets, Hibernate H2 in memory
+
 #### Subject area
 - **Customers**: Users who open accounts and manage their finances.
 - **Accounts**: various types of accounts (savings, current, etc.).
@@ -38,7 +45,7 @@ The project is a web application for managing clients' bank accounts. Customers 
 #### Example of multithreading
 Using threads to process transactions. Each time a client initiates a transaction, a new thread is created that processes that transaction, while ensuring data security through synchronization.
 
-#### Example of the project structure
+#### Project structure
 ```
 /bank-app
     /src
@@ -61,9 +68,7 @@ Using threads to process transactions. Each time a client initiates a transactio
                         TreeUtil.java
                         CacheUtil.java
             /resources
-                /db
-                    schema.sql
-                    data.sql
+                hibernate.cfg.xml
             /webapp
                 /WEB-INF
                     web.xml
