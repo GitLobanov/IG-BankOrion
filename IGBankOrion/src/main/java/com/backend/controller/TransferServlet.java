@@ -29,13 +29,11 @@ public class TransferServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.getRequestDispatcher("transfer.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         double amount = Double.parseDouble(req.getParameter("transferAmount"));
         Card cardTo = cardRepository.findByCardNumber(req.getParameter("cardTo"));
