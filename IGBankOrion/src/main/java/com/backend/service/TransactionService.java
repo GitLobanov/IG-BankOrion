@@ -6,6 +6,8 @@ import com.backend.repository.CardRepository;
 import com.backend.repository.TransactionRepository;
 import com.backend.util.HibernateUtil;
 
+import java.time.LocalDate;
+
 public class TransactionService {
 
     TransactionRepository transactionRepository;
@@ -22,7 +24,7 @@ public class TransactionService {
         cardTransaction.setCardFrom(from);
         cardTransaction.setCardTo(to);
         cardTransaction.setAmount(amount);
-        cardTransaction.setDate("09/09/2024");
+        cardTransaction.setDate(LocalDate.now().toString());
 
         transactionRepository.save(cardTransaction);
 
