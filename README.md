@@ -95,4 +95,4 @@ The Financial Assistant project provides an opportunity to explore various aspec
 
 - **History of purchases**
 
-- ![image](https://github.com/user-attachments/assets/2f1da777-79a1-4b43-ac55-f9fc13a313c5)
+![image](https://github.com/user-attachments/assets/2f1da777-79a1-4b43-ac55-f9fc13a313c5)
